@@ -1,6 +1,6 @@
 # music
-
-To start, input the command ```python manage.py runserver```
+---
+start command: ```python manage.py runserver```
 ---  
 修改：
 1. 创建了user
@@ -8,7 +8,7 @@ To start, input the command ```python manage.py runserver```
 3. 增加了一些sql语句
 4. 在Database/others中增加了一张名为user.jpg的图片
 
-未解决的问题：
+未解决的问题：<br/>
 1.base.html中无法访问到我的空间，因为没找到解决url问题的方法
 
 访问方法：<br/>
