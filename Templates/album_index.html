@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+{% block title %}
+<head>
+    <meta charset="UTF-8">
+    <title>专辑</title>
+    <style type="text/css">
+    ul li{display:inline;}
+    </style>
+</head>
+{% endblock%}
+<body>
+{% include "base.html" %}
+{% load staticfiles %}
+{% block content %}
+
+{% endblock %}
+<div style="padding:20px;margin-top:30px;background-color:#6e99b4;">
+<ul class="">
+    {% for album in albums%}
+        {% with "pic/"|add:album.id|add:".jpg" as image %}
+        <li class="">
+            <a href="{% url 'album:detail' album.id %}"
+               class="" onclick="setStatCookie&amp;&amp;setStatCookie();"
+               hidefocus="true" title={{ album.name }}>
+            <img class="" onerror="this.src='{% static image %}';this.onerror=null;"
+                 src="{% static image %}" width="200" height="200" alt={{ album.name }}>
+            </a>
+            <h3 class="">
+                <a href="{% url 'album:detail' album.id %}"
+                   onclick="setStatCookie&amp;&amp;setStatCookie();"
+                   class="" title={{ album.name }}>
+                    专辑：{{ album.name }}
+                </a>
+            </h3>
+            <h4 class="">
+                发布时间：{{ album.publishtime }}<br>
+                唱片公司：{{ album.company }}
+            </h4>
+        </li>
+        {% endwith %}
+    {% endfor %}
+</ul>
+</div>
+</body>
+</html>

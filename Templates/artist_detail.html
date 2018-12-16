@@ -1,0 +1,80 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>{{ artist.name }}</title>#}
+{#</head>#}
+{#<body>#}
+{##}
+{#{% load staticfiles %}#}
+{#{% with "pic/"|add:artist.id|add:".jpg" as image %}#}
+{#<a href="{% url 'artist:detail' artist.id %}"#}
+{#   class="" onclick="setStatCookie&amp;&amp;setStatCookie();"#}
+{#   hidefocus="true" title={{ artist.name }}>#}
+{#<img class="" onerror="this.src='{% static image %}';this.onerror=null;"#}
+{#     src="{% static image %}" width="300" height="243" alt={{ artist.name }}>#}
+{#</a>#}
+{#<h3 class="">#}
+{#<a href="{% url 'artist:detail' artist.id %}"#}
+{#   onclick="setStatCookie&amp;&amp;setStatCookie();"#}
+{#   class="" title={{ artist.name }}>#}
+{#    歌手：{{ artist.name }}#}
+{#</a>#}
+{#</h3>#}
+{#{% endwith %}#}
+{##}
+{#<ul class="">#}
+{#    {% for album in albums%}#}
+{#        {% with "pic/"|add:album.id|add:".jpg" as image %}#}
+{#        <li class="">#}
+{#            <a href="#"#}
+{#               class="" onclick="setStatCookie&amp;&amp;setStatCookie();"#}
+{#               hidefocus="true" title={{ album.name }}>#}
+{#            <img class="" onerror="this.src='{% static image %}';this.onerror=null;"#}
+{#                 src="{% static image %}" width="300" height="300" alt={{ album.name }}>#}
+{#            </a>#}
+{#            <h3 class="">#}
+{#                <a href="#"#}
+{#                   onclick="setStatCookie&amp;&amp;setStatCookie();"#}
+{#                   class="" title={{ album.name }}>#}
+{#                    专辑：{{ album.name }}#}
+{#                </a>#}
+{#            </h3>#}
+{#            <h4 class="">#}
+{#                发布时间：{{ album.publishtime }}<br>#}
+{#                唱片公司：{{ album.company }}#}
+{#            </h4>#}
+{#        </li>#}
+{#        {% endwith %}#}
+{#    {% endfor %}#}
+{#</ul>#}
+{#</body>#}
+{#</html>#}
+
+{% extends 'album_index.html'%}
+{% block title %}
+    <head>
+    <meta charset="UTF-8">
+    <title>{{ artist.name }}</title>
+    </head>
+{% endblock%}
+
+{% load staticfiles %}
+
+{% block content %}
+    {% with "pic/"|add:artist.id|add:".jpg" as image %}
+        <a href="#"
+           class="" onclick="setStatCookie&amp;&amp;setStatCookie();"
+           hidefocus="true" title={{ artist.name }}>
+            <img class="" onerror="this.src='{% static image %}';this.onerror=null;"
+                 src="{% static image %}" width="200" height="162" alt={{ artist.name }}>
+        </a>
+        <h3 class="">
+            <a href="#"
+               onclick="setStatCookie&amp;&amp;setStatCookie();"
+               class="" title={{ artist.name }}>
+                歌手：{{ artist.name }}
+            </a>
+        </h3>
+    {% endwith %}
+{% endblock %}

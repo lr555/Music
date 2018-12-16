@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ album.name }}</title>
+</head>
+<body>
+{% load staticfiles %}
+
+{% with "pic/"|add:album.id|add:".jpg" as image %}
+    <a href="#" class="" onclick="setStatCookie&amp;&amp;setStatCookie();"
+       hidefocus="true" title={{ album.name }}>
+        <img class="" onerror="this.src='{% static image %}';this.onerror=null;"
+             src="{% static image %}" width="200" height="200" alt={{ album.name }}>
+    </a>
+    <h3 class="">
+        <a href="#" onclick="setStatCookie&amp;&amp;setStatCookie();"
+           class="" title={{ album.name }}>
+            专辑：{{ album.name }}
+        </a>
+    </h3>
+    <h4 class="">
+        发布时间：{{ album.publishtime }}<br>
+        唱片公司：{{ album.company }}
+    </h4>
+{% endwith %}
+<ul class="">
+    {% for song in songs%}
+        <li class="">
+            <h3 class="">
+                <a href="#"
+                   onclick="setStatCookie&amp;&amp;setStatCookie();"
+                   class="" title={{ song.name }}>
+                    歌曲：{{ song.name }}
+                </a>
+            </h3>
+        </li>
+    {% endfor %}
+</ul>
+
+</body>
+</html>

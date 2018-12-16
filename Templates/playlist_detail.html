@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ playlist.name }}</title>
+</head>
+<body>
+{% load staticfiles %}
+
+{% with "others/"|add:playlist.pic_path|add:".jpg" as image %}
+    <a href="#" class="" onclick="setStatCookie&amp;&amp;setStatCookie();"
+       hidefocus="true" title={{ playlist.name }}>
+        <img class="" onerror="this.src='{% static image %}';this.onerror=null;"
+             src="{% static image %}" width="288" height="162" alt={{ playlist.name }}>
+    </a>
+    <h3 class="">
+        <a href="#" onclick="setStatCookie&amp;&amp;setStatCookie();"
+           class="" title={{ playlist.name }}>
+            {{ playlist.name }}
+        </a>
+    </h3>
+    <h4 class="">
+        创建者：{{ playlist.creator }}<br>
+        创建时间：{{ playlist.created_time }}
+    </h4>
+{% endwith %}
+
+<ul class="">
+    {% for song in songs%}
+        <li class="">
+            <h3 class="">
+                <a href="#"
+                   onclick="setStatCookie&amp;&amp;setStatCookie();"
+                   class="" title={{ song.name }}>
+                    歌曲：{{ song.name }}
+                </a>
+            </h3>
+        </li>
+    {% endfor %}
+</ul>
+
+</body>
+</html>

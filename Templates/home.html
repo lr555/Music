@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>主页</title>
+    <style type="text/css">
+    ul li{display:inline;}
+    </style>
+</head>
+<body>
+{% include "base.html" %}
+{% load staticfiles %}
+<div style="padding:20px;margin-top:30px;background-color:#6e99b4;height:1500px;">
+    <h1>歌曲推荐</h1>
+    <ul class="">
+    {% for song in songs%}
+        <li class="">
+            <h3 class="">
+                <a href="#"
+                   onclick="setStatCookie&amp;&amp;setStatCookie();"
+                   class="" title={{ song.name }}>
+                    {{ song.name }}
+                </a>
+            </h3>
+        </li>
+    {% endfor %}
+    </ul>
+    <h1>歌手推荐</h1>
+    <ul class="">
+        {% for artist in artists%}
+            {% with "pic/"|add:artist.id|add:".jpg" as image %}
+            <li class="">
+                <a href="{% url 'artist:detail' artist.id %}"
+                   class="" onclick="setStatCookie&amp;&amp;setStatCookie();"
+                   hidefocus="true" title={{ artist.name }}>
+                <img class="" onerror="this.src='{% static image %}';this.onerror=null;"
+                     src="{% static image %}" width="200" height="162" alt={{ artist.name }}>
+                </a>
+                <h3 class="">
+                    <a href="{% url 'artist:detail' artist.id %}"
+                       onclick="setStatCookie&amp;&amp;setStatCookie();"
+                       class="" title={{ artist.name }}>
+                        {{ artist.name }}
+                    </a>
+                </h3>
+            </li>
+            {% endwith %}
+        {% endfor %}
+    </ul>
+    <h1>专辑推荐</h1>
+    <ul class="">
+    {% for album in albums%}
+        {% with "pic/"|add:album.id|add:".jpg" as image %}
+            <li class="">
+                <a href="{% url 'album:detail' album.id %}"
+                   class="" onclick="setStatCookie&amp;&amp;setStatCookie();"
+                   hidefocus="true" title={{ album.name }}>
+                    <img class="" onerror="this.src='{% static image %}';this.onerror=null;"
+                         src="{% static image %}" width="200" height="200" alt={{ album.name }}>
+                </a>
+                <h3 class="">
+                    <a href="{% url 'album:detail' album.id %}"
+                       onclick="setStatCookie&amp;&amp;setStatCookie();"
+                       class="" title={{ album.name }}>
+                        专辑：{{ album.name }}
+                    </a>
+                </h3>
+                <h4 class="">
+                    发布时间：{{ album.publishtime }}<br>
+                    唱片公司：{{ album.company }}
+                </h4>
+            </li>
+        {% endwith %}
+    {% endfor %}
+    </ul>
+    <h1>歌单推荐</h1>
+    <ul class="">
+    {% for playlist in playlists%}
+        {% with "others/"|add:playlist.pic_path|add:".jpg" as image %}
+        <li class="">
+            <a href="{% url 'playlist:detail' playlist.id %}"
+               class="" onclick="setStatCookie&amp;&amp;setStatCookie();"
+               hidefocus="true" title={{ playlist.name }}>
+            <img class="" onerror="this.src='{% static image %}';this.onerror=null;"
+                 src="{% static image %}" width="288" height="162" alt={{ playlist.name }}>
+            </a>
+            <h3 class="">
+                <a href="{% url 'playlist:detail' playlist.id %}"
+                   onclick="setStatCookie&amp;&amp;setStatCookie();"
+                   class="" title={{ playlist.name }}>
+                    {{ playlist.name }}
+                </a>
+            </h3>
+            <h4 class="">
+                创建者：{{ playlist.creator }}<br>
+                创建时间：{{ playlist.created_time }}
+            </h4>
+        </li>
+        {% endwith %}
+    {% endfor %}
+    </ul>
+</div>
+</body>
+</html>
