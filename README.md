@@ -1,8 +1,7 @@
 # music
----
-To start, input the command<br/>
-    ```python manage.py runserver```
-    
+
+To start, input the command ```python manage.py runserver```
+---  
 修改：
 1. 创建了user
 2. 修改了一些原有逻辑，如：显示推荐歌单时不显示‘我喜欢的音乐’
