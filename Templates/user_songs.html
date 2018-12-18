@@ -3,39 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title>我喜欢的</title>
-    <style type="text/css">
-    ul li{display:inline;}
-    </style>
 </head>
 
 <body>
 {% load staticfiles %}
 {% include "base.html" %}
-{% include "base_user.html" %}
 
-{% with "others/user.jpg" as image %}
-<div align="center">
-<h4 class="">
-<img class="" onerror="this.src='{% static image %}';this.onerror=null;"
+{% with "Database/others/user.jpg" as image %}
+    <div align="center">
+        <h4 class="">
+            <img class="" onerror="this.src='{% static image %}';this.onerror=null;"
                  src="{% static image %}" width="230" height="162">
-<br>
-{% for nameid in user %}
-<p align="center">
-用户ID：{{ nameid.id }}
-用户名：{{ nameid.name }}
-</p>
-{% endfor%}
-</h4>
-</div>
+            <br>
+            {% for nameid in user %}
+                <p align="center">
+                    用户ID：{{ nameid.id }}
+                    用户名：{{ nameid.name }}
+                </p>
+            {% endfor %}
+        </h4>
+    </div>
 {% endwith %}
 
 
 {% for nameid in user %}
-<ul id="bar">
-    <li><a href="{% url 'user:song' nameid.id %}">我喜欢的音乐</a></li>
-    <li><a href="{% url 'user:playlist' nameid.id %}">我收藏的歌单</a></li>
-</ul>
-{% endfor%}
+    <ul id="bar">
+        <li><a href="{% url 'user:song' nameid.id %}">我喜欢的音乐</a></li>
+        <li><a href="{% url 'user:playlist' nameid.id %}">我收藏的歌单</a></li>
+    </ul>
+{% endfor %}
 
 {% comment %} <div style="padding:20px;margin-top:30px;background-color:#6e99b4;">
 <ul class="">
@@ -53,38 +49,38 @@
     {% endfor %}
 </ul> {% endcomment %}
 <table id="customers">
-<tr>
-  <th>歌曲名称</th>
-  <th>演唱者</th>
-  <th>专辑</th>
-</tr>
-{% for song in songs%}
-<tr class="alt">
-    <td>
-        <a href="#"
+    <tr>
+        <th>歌曲名称</th>
+        <th>演唱者</th>
+        <th>专辑</th>
+    </tr>
+    {% for song in songs %}
+        <tr class="alt">
+            <td>
+                <a href="{% url 'song:detail' song.song_id %}"
                    onclick="setStatCookie&amp;&amp;setStatCookie();"
                    class="alt" title={{ song.song_name }}>
                     {{ song.song_name }}
                 </a>
-    </td>
+            </td>
 
-    <td>
-        <a href="{% url 'artist:detail' song.artist_id %}"
+            <td>
+                <a href="{% url 'artist:detail' song.artist_id %}"
                    onclick="setStatCookie&amp;&amp;setStatCookie();"
                    class="alt" title={{ song.artist_name }}>
                     {{ song.artist_name }}
                 </a>
-    </td>
+            </td>
 
-    <td>
-        <a href="{% url 'album:detail' song.album_id %}"
+            <td>
+                <a href="{% url 'album:detail' song.album_id %}"
                    onclick="setStatCookie&amp;&amp;setStatCookie();"
                    class="alt" title={{ song.album_name }}>
                     {{ song.album_name }}
                 </a>
-    </td>
-</tr>
-{% endfor %}
+            </td>
+        </tr>
+    {% endfor %}
 </table>
 
 </body>

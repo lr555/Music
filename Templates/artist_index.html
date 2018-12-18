@@ -3,32 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>歌手</title>
-    <style type="text/css">
-    ul li{display:inline;}
-    </style>
 </head>
 <body>
 {% include "base.html" %}
 {% load staticfiles %}
 <div style="padding:20px;margin-top:30px;background-color:#6e99b4;">
     <ul class="">
-        {% for artist in artists%}
-            {% with "pic/"|add:artist.id|add:".jpg" as image %}
-            <li class="">
-                <a href="{% url 'artist:detail' artist.id %}"
-                   class="" onclick="setStatCookie&amp;&amp;setStatCookie();"
-                   hidefocus="true" title={{ artist.name }}>
-                <img class="" onerror="this.src='{% static image %}';this.onerror=null;"
-                     src="{% static image %}" width="200" height="162" alt={{ artist.name }}>
-                </a>
-                <h3 class="">
+        {% for artist in artists %}
+            {% with "Database/pic/"|add:artist.id|add:".jpg" as image %}
+                <li class="">
                     <a href="{% url 'artist:detail' artist.id %}"
-                       onclick="setStatCookie&amp;&amp;setStatCookie();"
-                       class="" title={{ artist.name }}>
-                        {{ artist.name }}
+                       class="" onclick="setStatCookie&amp;&amp;setStatCookie();"
+                       hidefocus="true" title={{ artist.name }}>
+                        <img class="" onerror="this.src='{% static image %}';this.onerror=null;"
+                             src="{% static image %}" width="200" height="162" alt={{ artist.name }}>
                     </a>
-                </h3>
-            </li>
+                    <h3 class="">
+                        <a href="{% url 'artist:detail' artist.id %}"
+                           onclick="setStatCookie&amp;&amp;setStatCookie();"
+                           class="" title={{ artist.name }}>
+                            {{ artist.name }}
+                        </a>
+                    </h3>
+                </li>
             {% endwith %}
         {% endfor %}
     </ul>

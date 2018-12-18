@@ -3,65 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <title>我收藏的歌单</title>
-    <style type="text/css">
-    ul li{display:inline;}
-    </style>
 </head>
 
 <body>
 {% load staticfiles %}
 {% include "base.html" %}
-{% include "base_user.html" %}
 
-{% with "others/user.jpg" as image %}
-<div align="center">
-<h4 class="">
-<img class="" onerror="this.src='{% static image %}';this.onerror=null;"
+{% with "Database/others/user.jpg" as image %}
+    <div align="center">
+        <h4 class="">
+            <img class="" onerror="this.src='{% static image %}';this.onerror=null;"
                  src="{% static image %}" width="230" height="162">
-<br>
-{% for nameid in user %}
-<p align="center">
-用户ID：{{ nameid.id }}
-用户名：{{ nameid.name }}
-</p>
-{% endfor%}
-</h4>
-</div>
+            <br>
+            {% for nameid in user %}
+                <p align="center">
+                    用户ID：{{ nameid.id }}
+                    用户名：{{ nameid.name }}
+                </p>
+            {% endfor %}
+        </h4>
+    </div>
 {% endwith %}
 
 {% for nameid in user %}
-<ul id="bar">
-    <li><a href="{% url 'user:song' nameid.id %}">我喜欢的音乐</a></li>
-    <li><a href="{% url 'user:playlist' nameid.id %}">我收藏的歌单</a></li>
-</ul>
-{% endfor%}
+    <ul id="bar">
+        <li><a href="{% url 'user:song' nameid.id %}">我喜欢的音乐</a></li>
+        <li><a href="{% url 'user:playlist' nameid.id %}">我收藏的歌单</a></li>
+    </ul>
+{% endfor %}
 
 <div style="padding:20px;background-color:#6e99b4;">
-<ul class="">
-    {% for playlist in playlists%}
-        {% with "others/"|add:playlist.pic_path|add:".jpg" as image %}
-        <li class="">
-            <a href="{% url 'playlist:detail' playlist.id %}"
-               class="" onclick="setStatCookie&amp;&amp;setStatCookie();"
-               hidefocus="true" title={{ playlist.name }}>
-            <img class="" onerror="this.src='{% static image %}';this.onerror=null;"
-                 src="{% static image %}" width="288" height="162" alt={{ playlist.name }}>
-            </a>
-            <h3 class="">
-                <a href="{% url 'playlist:detail' playlist.id %}"
-                   onclick="setStatCookie&amp;&amp;setStatCookie();"
-                   class="" title={{ playlist.name }}>
-                    {{ playlist.name }}
-                </a>
-            </h3>
-            <h4 class="">
-                创建者：{{ playlist.creator }}<br>
-                歌曲数量：{{ playlist.count }}首
-            </h4>
-        </li>
-        {% endwith %}
-    {% endfor %}
-</ul>
+    <ul class="">
+        {% for playlist in playlists %}
+            {% with "Database/others/"|add:playlist.pic_path|add:".jpg" as image %}
+                <li class="">
+                    <a href="{% url 'playlist:detail' playlist.id %}"
+                       class="" onclick="setStatCookie&amp;&amp;setStatCookie();"
+                       hidefocus="true" title={{ playlist.name }}>
+                        <img class="" onerror="this.src='{% static image %}';this.onerror=null;"
+                             src="{% static image %}" width="288" height="162" alt={{ playlist.name }}>
+                    </a>
+                    <h3 class="">
+                        <a href="{% url 'playlist:detail' playlist.id %}"
+                           onclick="setStatCookie&amp;&amp;setStatCookie();"
+                           class="" title={{ playlist.name }}>
+                            {{ playlist.name }}
+                        </a>
+                    </h3>
+                    <h4 class="">
+                        创建者：{{ playlist.creator }}<br>
+                        歌曲数量：{{ playlist.count }}首
+                    </h4>
+                </li>
+            {% endwith %}
+        {% endfor %}
+    </ul>
 </div>
 </body>
 </html>

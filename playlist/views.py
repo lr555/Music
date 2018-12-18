@@ -3,6 +3,7 @@ from django.db import connection
 from . import models
 import time
 
+
 # Create your views here.
 def playlist_index(request):
     content = {}
@@ -18,9 +19,10 @@ def playlist_index(request):
             t = time.localtime(float(row[3]))
             created_time = time.strftime("%Y-%m-%d", t)
             content['playlists'].append(models.Playlist(
-                row[0],row[1],row[2],created_time,row[4],row[5],row[6]
+                row[0], row[1], row[2], created_time, row[4], row[5], row[6]
             ))
     return render(request, 'playlist_index.html', content)
+
 
 def playlist_detail(request, id):
     content = {}
@@ -34,7 +36,7 @@ def playlist_detail(request, id):
         t = time.localtime(float(result[3]))
         created_time = time.strftime("%Y-%m-%d", t)
         content['playlist'] = models.Playlist(
-                result[0],result[1],result[2],created_time,result[4],result[5],result[6]
+            result[0], result[1], result[2], created_time, result[4], result[5], result[6]
         )
 
     content['songs'] = []
@@ -44,5 +46,5 @@ def playlist_detail(request, id):
     result = cursor.fetchall()
     if result:
         for row in result:
-            content['songs'].append(models.Song(row[0],row[1],row[2]))
+            content['songs'].append(models.Song(row[0], row[1], row[2]))
     return render(request, 'playlist_detail.html', content)
