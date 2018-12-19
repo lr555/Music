@@ -7,3 +7,5 @@
 目前代码已上传github
 如果想要git上协作也可以
 目前看来QQ流水线式运行良好，因此个人觉得没有必要改变
+
+https://github.com/wlllssd/music
