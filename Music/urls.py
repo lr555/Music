@@ -23,5 +23,6 @@ urlpatterns = [
     path('playlist/', include(('playlist.urls', 'playlist'), namespace='playlist')),
     path('song/', include(('song.urls', 'song'), namespace='song')),
     path('user/', include(('user.urls', 'user'), namespace='user')),
+    path('search/',include(('search.urls','search'),namespace='search')),
     path('', include(('home.urls', 'home'), namespace='home'))
 ]

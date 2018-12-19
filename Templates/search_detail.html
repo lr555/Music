@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>搜索</title>
+</head>
+
+<body>
+{% load staticfiles %}
+{% include "base.html" %}
+<form role="search" method="get" id="searchform" action="{% url 'search:detail' %}">
+  <input type="search" name="q" placeholder="搜索" required>
+  <input type="submit" value="提交">
+</form>
+{% block main %}
+<table id="customers">
+    <tr>
+        <th>歌曲名称</th>
+        <th>演唱者</th>
+        <th>专辑</th>
+    </tr>
+    {% for song in songs %}
+        <tr class="alt">
+            <td>
+                <a href="{% url 'song:detail' song.song_id %}"
+                   onclick="setStatCookie&amp;&amp;setStatCookie();"
+                   class="alt" title={{ song.song_name }}>
+                    {{ song.song_name }}
+                </a>
+            </td>
+
+            <td>
+                <a href="{% url 'artist:detail' song.artist_id %}"
+                   onclick="setStatCookie&amp;&amp;setStatCookie();"
+                   class="alt" title={{ song.artist_name }}>
+                    {{ song.artist_name }}
+                </a>
+            </td>
+
+            <td>
+                <a href="{% url 'album:detail' song.album_id %}"
+                   onclick="setStatCookie&amp;&amp;setStatCookie();"
+                   class="alt" title={{ song.album_name }}>
+                    {{ song.album_name }}
+                </a>
+            </td>
+        </tr>
+    {% empty %}
+        <div class="no-post">未找到相关内容！</div>
+    {% endfor %}
+</table>
+{% endblock main %}
+
+</body>
+</html>

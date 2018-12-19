@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'playlist',
     'song',
     'user',
+    'search',
 ]
 
 MIDDLEWARE = [
