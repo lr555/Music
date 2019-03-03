@@ -30,7 +30,7 @@ DATABASES = {
 ```
 将NAME和PASSWORD改成你数据库名称和密码。
 
-## run the project
+## Run the project
 ```python
 python manage.py runserver
 http://localhost:8000
