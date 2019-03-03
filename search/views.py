@@ -9,7 +9,7 @@ import time
 def search_detail(request):
     q = request.GET.get('q')
     content = {}
-
+    content['is_login'] = request.session.get('is_login', None)
     content['songs'] = []
     cursor = connection.cursor()
     cursor.execute('''select song_id,song_name,album_id,album_name,artist_id,artist_name 
@@ -31,4 +31,6 @@ def search_detail(request):
     return render(request, 'search_detail.html', content)
 
 def search_home(request):
-    return render(request,'search_home.html')
+    content = {}
+    content['is_login'] = request.session.get('is_login', None)
+    return render(request,'search_home.html',content)
