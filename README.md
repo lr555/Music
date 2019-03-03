@@ -9,8 +9,29 @@
 
 4. pip install django
 
-## run the project
+5. 将数据库文件导入当前电脑的mysql数据库，root为用户名，proj_music为数据库名字，
+最后不要修改名字。
+```mysql
+   mysql -u root -p proj_music < db_music.sql
 ```
+
+6. 在setting.py中，将
+```python
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'proj_music',
+        'USER': 'root',
+        'PASSWORD': 'asdzxc123',
+        'HOST':'localhost',
+        'PORT':'3306',
+    }
+}
+```
+将NAME和PASSWORD改成你数据库名称和密码。
+
+## run the project
+```python
 python manage.py runserver
 http://localhost:8000
 ```
