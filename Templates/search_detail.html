@@ -7,13 +7,12 @@
 
 <body>
 {% load staticfiles %}
+<link rel="stylesheet" href="{% static 'CSS/base.css' %}" type="text/css"/>
+<link rel="stylesheet" href="{% static 'CSS/album_detail.css' %}" type="text/css"/>
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 {% include "base.html" %}
-<form role="search" method="get" id="searchform" action="{% url 'search:detail' %}">
-  <input type="search" name="q" placeholder="搜索" required>
-  <input type="submit" value="提交">
-</form>
 {% block main %}
-<table id="customers">
+<table class="table table-striped">
     <tr>
         <th>歌曲名称</th>
         <th>演唱者</th>
@@ -23,20 +22,18 @@
         <tr class="alt">
             <td>
                 <a href="{% url 'song:detail' song.song_id %}"
-                   onclick="setStatCookie&amp;&amp;setStatCookie();"
-                   class="alt" title={{ song.song_name }}>
+                    onclick="setStatCookie&amp;&amp;setStatCookie();"
+                    class="alt" title={{ song.song_name }}>
                     {{ song.song_name }}
                 </a>
             </td>
-
             <td>
                 <a href="{% url 'artist:detail' song.artist_id %}"
-                   onclick="setStatCookie&amp;&amp;setStatCookie();"
-                   class="alt" title={{ song.artist_name }}>
+                    onclick="setStatCookie&amp;&amp;setStatCookie();"
+                    class="alt" title={{ song.artist_name }}>
                     {{ song.artist_name }}
                 </a>
             </td>
-
             <td>
                 <a href="{% url 'album:detail' song.album_id %}"
                    onclick="setStatCookie&amp;&amp;setStatCookie();"
@@ -45,8 +42,6 @@
                 </a>
             </td>
         </tr>
-    {% empty %}
-        <div class="no-post">未找到相关内容！</div>
     {% endfor %}
 </table>
 {% endblock main %}

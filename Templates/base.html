@@ -1,16 +1,55 @@
 {% load staticfiles %}
 <link rel="stylesheet" href="{% static 'CSS/base.css' %}" type="text/css"/>
-<ul>
-    {% with 1551 as id %}
-        <li><a class="active" href="{% url 'home:home' %}">主页</a></li>
-        <li><a href="{% url 'artist:index' %}">歌手</a></li>
-        <li><a href="{% url 'album:index' %}">专辑</a></li>
-        <li><a href="{% url 'playlist:index' %}">歌单</a></li>
-        <li><a href="{% url 'user:song' id %}">我的空间</a></li>
-        <li><a href="{% url 'search:home' %}">搜索</a></li>
-        <form role="search" method="get" id="searchform" action="{% url 'search:detail' %}">
-            <input type="search" name="q" placeholder="搜索" required>
-            <input type="submit" value="提交">
-        </form>
-    {% endwith %}
-</ul>
+<div class="mod_header">
+    <div class="section_inner">
+        <ul class="mod_top_nav" role="nav">
+
+            <li class="top_nav__item">
+                <a href="{% url 'home:home' %}" class="top_nav__link top_nav__link--current" title="主页">
+                    主页
+                </a>
+            </li>
+            <li class="top_nav__item">
+                <a href="{% url 'artist:index' %}" class="top_nav__link" title="歌手">
+                    歌手
+                </a>
+            </li>
+            <li class="top_nav__item">
+                <a href="{% url 'album:index' %}" class="top_nav__link" title="专辑">
+                    专辑
+                </a>
+            </li>
+            <li class="top_nav__item">
+                <a href="{% url 'playlist:index' %}" class="top_nav__link" title="歌单">
+                    歌单
+                </a>
+            </li>
+            <li class="top_nav__item">
+                <a href="{% url 'user:my_song' %}" class="top_nav__link" title="我的空间">
+                    我的空间
+                </a>
+            </li>
+
+        </ul>
+        <div class="mod_top_search" role="search">
+            <div class="mod_search_input">
+                <form role="search" method="get" id="searchform" action="{% url 'search:detail' %}">
+                    <input class="search_input__input" name="q" aria-label="请输入搜索内容" type="searchform"
+                           placeholder="搜索音乐" required>
+                    <button type="submit" class="btn_base search_input__btn">
+                        搜索
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div class="register_login">
+            <a href="{% url 'register:display' %}" title="注册">注册</a>
+            /
+            {% if not is_login %}
+                <a href="{% url 'login:display' %}" title="登录">登录</a>
+            {% else %}
+                <a href="{% url 'logout:#' %}" title="登出">登出</a>
+            {% endif %}
+        </div>
+    </div>
+</div>

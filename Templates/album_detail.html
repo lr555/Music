@@ -1,42 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>{{ album.name }}</title>
 </head>
+
 <body>
+{% include "base.html" %}
 {% load staticfiles %}
+<link rel="stylesheet" href="{% static 'CSS/album_detail.css' %}" type="text/css"/>
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<div class="main">
+    <div class="mod_data">
+            <span class="data__cover">
+                {% with "Database/pic/"|add:album.id|add:".jpg" as image %}
+                    <img id="albumImg"
+                         src="{% static image %}"
+                         onerror="this.src=;this.onerror=null;"
+                         alt="{{ album.name }}" class="data__photo">
+                {% endwith %}
+            </span>
+        <div class="data__cont">
+            <div class="data__name">
+                <h1 class="data__name_txt" title="{{ album.name }}">
+                    {{ album.name }}
+                </h1>
+            </div>
+            <a href="{% url 'artist:detail' album.artist_id %}"
+               class="js_singer data__singer_txt" itemprop="byArtist"
+               title="{{ album.artist_name }}">
+                {{ album.artist_name }}
+            </a>
+            <ul class="data__info">
+                <li class="data_info__item">发行时间：{{ album.publishtime }}</li>
+                <li class="data_info__item data_info__item--even">唱片公司：{{ album.company }}</li>
+            </ul>
+            <table class="table table-striped">
+                <tr>
+                    <th>歌曲名称</th>
+                    <th>演唱者</th>
+                </tr>
+                {% for song in songs %}
+                    <tr class="alt">
+                        <td>
+                            <a href="{% url 'song:detail' song.id %}"
+                               onclick="setStatCookie&amp;&amp;setStatCookie();"
+                               class="alt" title={{ song.name }}>
+                                {{ song.name }}
+                            </a>
+                        </td>
 
-{% with "Database/pic/"|add:album.id|add:".jpg" as image %}
-    <a href="#" class="" onclick="setStatCookie&amp;&amp;setStatCookie();"
-       hidefocus="true" title={{ album.name }}>
-        <img class="" onerror="this.src='{% static image %}';this.onerror=null;"
-             src="{% static image %}" width="200" height="200" alt={{ album.name }}>
-    </a>
-    <h3 class="">
-        <a href="#" onclick="setStatCookie&amp;&amp;setStatCookie();"
-           class="" title={{ album.name }}>
-            专辑：{{ album.name }}
-        </a>
-    </h3>
-    <h4 class="">
-        发布时间：{{ album.publishtime }}<br>
-        唱片公司：{{ album.company }}
-    </h4>
-{% endwith %}
-<ul class="">
-    {% for song in songs %}
-        <li class="">
-            <h3 class="">
-                <a href="{% url 'song:detail' song.id %}"
-                   onclick="setStatCookie&amp;&amp;setStatCookie();"
-                   class="" title={{ song.name }}>
-                    歌曲：{{ song.name }}
-                </a>
-            </h3>
-        </li>
-    {% endfor %}
-</ul>
-
+                        <td>
+                            <a href="{% url 'artist:detail' song.artist_id %}"
+                               onclick="setStatCookie&amp;&amp;setStatCookie();"
+                               class="alt" title={{ song.artist_name }}>
+                                {{ song.artist_name }}
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
 </body>
 </html>

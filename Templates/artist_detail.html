@@ -1,4 +1,3 @@
-
 {% extends 'album_index.html' %}
 {% block title %}
     <head>
@@ -10,19 +9,18 @@
 {% load staticfiles %}
 
 {% block content %}
+    <link rel="stylesheet" href="{% static 'CSS/artist_index.css' %}" type="text/css"/>
     {% with "Database/pic/"|add:artist.id|add:".jpg" as image %}
-        <a href="#"
-           class="" onclick="setStatCookie&amp;&amp;setStatCookie();"
-           hidefocus="true" title={{ artist.name }}>
-            <img class="" onerror="this.src='{% static image %}';this.onerror=null;"
-                 src="{% static image %}" width="200" height="162" alt={{ artist.name }}>
-        </a>
-        <h3 class="">
-            <a href="#"
-               onclick="setStatCookie&amp;&amp;setStatCookie();"
-               class="" title={{ artist.name }}>
-                歌手：{{ artist.name }}
-            </a>
-        </h3>
+        <div class="mod_singer_list">
+            <div class="singer_list__item_box" align="center">
+                <img class="singer_list__pic"
+                     onerror="this.src='{% static image %}';this.onerror=null;"
+                     src="{% static image %}"
+                     alt={{ artist.name }}>
+                <h3 class="singer_list__title">
+                    {{ artist.name }}
+                </h3>
+            </div>
+        </div>
     {% endwith %}
 {% endblock %}

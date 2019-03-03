@@ -1,44 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>{{ playlist.name }}</title>
 </head>
+
 <body>
 {% include "base.html" %}
 {% load staticfiles %}
-<div style="padding:20px;margin-top:30px;background-color:#6e99b4;height:1500px;">
-    {% with "Database/others/"|add:playlist.pic_path|add:".jpg" as image %}
-        <a href="#" class="" onclick="setStatCookie&amp;&amp;setStatCookie();"
-           hidefocus="true" title={{ playlist.name }}>
-            <img class="" onerror="this.src='{% static image %}';this.onerror=null;"
-                 src="{% static image %}" width="288" height="162" alt={{ playlist.name }}>
-        </a>
-        <h3 class="">
-            <a href="#" onclick="setStatCookie&amp;&amp;setStatCookie();"
-               class="" title={{ playlist.name }}>
-                {{ playlist.name }}
-            </a>
-        </h3>
-        <h4 class="">
-            创建者：{{ playlist.creator }}<br>
-            创建时间：{{ playlist.created_time }}
-        </h4>
-    {% endwith %}
+<link rel="stylesheet" href="{% static 'CSS/album_detail.css' %}" type="text/css"/>
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<div class="main">
+    <div class="mod_data">
+            <span class="data__cover">
+                {% with "Database/others/"|add:playlist.pic_path|add:".jpg" as image %}
+                    <img id="albumImg"
+                         src="{% static image %}"
+                         onerror="this.src=;this.onerror=null;"
+                         alt="{{ playlist.name }}" class="data__photo">
+                {% endwith %}
+                <div class="data__name">
+                <h1 class="data__name_txt" title="{{ playlist.user_name }}">
+                    {{ playlist.name }}
+                </h1>
+            </div>
+            </span>
+        <div class="data__cont">
+            <div class="js_singer data__singer_txt">创建者：
+                <a href="{% url 'user:song' playlist.creator_id %}"
+                   class="js_singer data__singer_txt" itemprop="byArtist"
+                   title="{{ playlist.creator_name }}">
+                    {{ playlist.creator_name }}
+                </a>
+            </div>
+            <ul class="data__info">
+                <li class="data_info__item">创建时间：{{ playlist.created_time }}</li>
+                <li class="data_info__item data_info__item--even">类型：{{ playlist.labels }}</li>
+            </ul>
+            <div class="like">
+                <form role="like" method="get" id="likeform" action="{% url 'playlist:detail' playlist.id %}">
+                    <input type="submit" name="l" class="button button1" value={{ isLike }}>
+                </form>
+            </div>
+            <table class="table table-striped">
+                <tr>
+                    <th>歌曲名称</th>
+                    <th>演唱者</th>
+                    <th>专辑</th>
+                </tr>
+                {% for song in songs %}
+                    <tr class="alt">
+                        <td>
+                            <a href="{% url 'song:detail' song.id %}"
+                               onclick="setStatCookie&amp;&amp;setStatCookie();"
+                               class="alt" title={{ song.name }}>
+                                {{ song.name }}
+                            </a>
+                        </td>
 
-    <ul class="">
-        {% for song in songs %}
-            <li class="">
-                <h3 class="">
-                    <a href="{% url 'song:detail' song.id %}"
-                       onclick="setStatCookie&amp;&amp;setStatCookie();"
-                       class="" title={{ song.name }}>
-                        歌曲：{{ song.name }}
-                    </a>
-                </h3>
-            </li>
-        {% endfor %}
-    </ul>
+                        <td>
+                            <a href="{% url 'artist:detail' song.artist_id %}"
+                               onclick="setStatCookie&amp;&amp;setStatCookie();"
+                               class="alt" title={{ song.artist_name }}>
+                                {{ song.artist_name }}
+                            </a>
+                        </td>
+
+                        <td>
+                            <a href="{% url 'album:detail' song.album_id %}"
+                               onclick="setStatCookie&amp;&amp;setStatCookie();"
+                               class="alt" title={{ song.album_name }}>
+                                {{ song.album_name }}
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
 </div>
 </body>
+
 </html>

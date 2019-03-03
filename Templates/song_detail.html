@@ -1,43 +1,94 @@
 <!DOCTYPE html>
 <html lang='zh-en'>
+{% load staticfiles %}
 <head>
     <meta charset="utf-8">
     <title>{{ song.name }}</title>
+    <link rel="stylesheet" href="{% static 'CSS/album_detail.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
 {% include "base.html" %}
-{% load staticfiles %}
-<div style="padding:20px;margin-top:30px;background-color:#6e99b4;height:1500px;">
-    {% with "Database/pic/"|add:album.id|add:".jpg" as image %}
-        <a href="#" class="" onclick="setStatCookie&amp;&amp;setStatCookie();" hidefocus="true" title={{ song.name }}>
-            <img class="" onerror="this.src='{% static image %}';this.onerror=null;" src="{% static image %}"
-                 width="200" height="200" alt={{ song.name }}>
-        </a>
-    {% endwith %}
-    <h3 class=""> {{ song.name }}
-    </h3>
-    <h3 class="">
-        <a href="{% url 'album:detail' album.id %}" onclick="setStatCookie&amp;&amp;setStatCookie();" class=""
-           title={{ album.name }}>
-            所属专辑：{{ album.name }}
-        </a>
-    </h3>
-    <h3 class="">
-        <a href="{% url 'artist:detail' artist.id %}" onclick="setStatCookie&amp;&amp;setStatCookie();" class=""
-           title={{ artist.name }}>
-            演唱歌手：{{ artist.name }}
-        </a>
-    </h3>
-    <div>
-        {% with 'Database/'|add:artist.name|add:"/"|add:album.name|add:"/"|add:song.name|add:".mp3" as audio %}
-            <audio controls="controls">
-                <source src="{% static audio %}" type="audio/mpeg">
-                您的浏览器不支持audio元素
-            </audio>
-        {% endwith %}
+<div class="main">
+    <div class="lyric">
+        <h2><strong>歌词：</strong></h2>
+        {% for line in lyric %}
+            {{ line }}
+            <br>
+        {% endfor %}
     </div>
-    <div>
+    <div class="mod_data">
+        <div class="data__cont">
+        <span class="data__cover">
+            {% with "Database/pic/"|add:album.id|add:".jpg" as image %}
+                <img id="albumImg" src="{% static image %}"
+                     onerror="this.src={% static image %};this.onerror=null;"
+                     alt="{{ album.name }}" class="data__photo">
+            {% endwith %}
+        </span>
+            <div class="data__name">
+                <h1 class="data__name_txt" title="{{ song.name }}">
+                    {{ song.name }}
+                </h1>
+            </div>
+            <h1 class="js_singer data__singer_txt" title="">
+            </h1>
+            <ul class="data__info">
+                <li class="data_info__item">
+                    <a href="{% url 'album:detail' album.id %}"
+                       class="data__singer_txt" itemprop="byArtist"
+                       title="{{ album.name }}">
+                        所属专辑：{{ album.name }}
+                    </a>
+                </li>
+                <li class="data_info__item data_info__item--even">
+                    <a id="artist" href="{% url 'artist:detail' artist.id %}"
+                       onclick="setStatCookie&amp;&amp;setStatCookie();"
+                       class="data__singer_txt"
+                       title={{ artist.name }}>
+                        演唱歌手：{{ artist.name }}
+                    </a>
+                </li>
+            </ul>
+            <h1 class="js_singer data__singer_txt" title="">
+            </h1>
+            <div class="audio">
+                <audio controls="controls" id="audio">
+                    {% with 'Database/'|add:artist.name|add:"/"|add:album.name|add:"/"|add:song.name|add:".mp3" as audio %}
+                        <source src="{% static audio %}" type="audio/mpeg">
+                        您的浏览器不支持audio元素
+                    {% endwith %}
+                </audio>
+            </div>
+            <div class="like">
+                <form role="like" method="get" id="likeform" action="{% url 'song:detail' song.id %}">
+                    <input type="submit" name="l" value={{ isLike }} class="button button1">
+                </form>
+            </div>
+
+            <div class="comment">
+                <form role="comment" method="get" id="commentform" action="{% url 'song:detail' song.id %}">
+                    <textarea name="comment_text" rows="10" cols="40" maxlength="200" required="required"
+                              placeholder="说点什么吧~">
+                    </textarea>
+                    <br>
+                    <input type="submit" value="发表评论" class="button button1">
+                </form>
+            </div>
+            <div class="comments">
+                <h3>精彩评论</h3>
+                {% for comment in comments %}
+                    <p>{{ comment.user_name }}</p>
+                    <p>   {{ comment.content }}</p>
+                    <p>{{ comment.created_time }}</p>
+                    <br>
+                {% endfor %}
+            </div>
+
+        </div>
+
     </div>
+
 </div>
 </body>
 </html>

@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -15,24 +16,24 @@
             <img class="" onerror="this.src='{% static image %}';this.onerror=null;"
                  src="{% static image %}" width="230" height="162">
             <br>
-            {% for nameid in user %}
-                <p align="center">
-                    用户ID：{{ nameid.id }}
-                    用户名：{{ nameid.name }}
-                </p>
-            {% endfor %}
+
+            <p align="center">
+                用户ID：{{ user.id }}
+                用户名：{{ user.name }}
+            </p>
+
         </h4>
     </div>
 {% endwith %}
 
-{% for nameid in user %}
-    <ul id="bar">
-        <li><a href="{% url 'user:song' nameid.id %}">我喜欢的音乐</a></li>
-        <li><a href="{% url 'user:playlist' nameid.id %}">我收藏的歌单</a></li>
-    </ul>
-{% endfor %}
 
-<div style="padding:20px;background-color:#6e99b4;">
+<ul id="bar">
+    <li><a href="{% url 'user:my_song' %}">我喜欢的音乐</a></li>
+    <li><a href="{% url 'user:my_playlist' %}">我收藏的歌单</a></li>
+</ul>
+
+
+<div style="padding:20px;background-color:#dcdde1;">
     <ul class="">
         {% for playlist in playlists %}
             {% with "Database/others/"|add:playlist.pic_path|add:".jpg" as image %}

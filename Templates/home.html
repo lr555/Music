@@ -7,95 +7,197 @@
 <body>
 {% include "base.html" %}
 {% load staticfiles %}
-<div style="padding:20px;margin-top:30px;background-color:#6e99b4;height:1500px;">
-    <h1>歌曲推荐</h1>
-    <ul class="">
-        {% for song in songs %}
-            <li class="">
-                <h3 class="">
-                    <a href="{% url 'song:detail' song.id %}"
-                       onclick="setStatCookie&amp;&amp;setStatCookie();"
-                       class="" title={{ song.name }}>
-                        {{ song.name }}
-                    </a>
-                </h3>
-            </li>
-        {% endfor %}
-    </ul>
-    <h1>歌手推荐</h1>
-    <ul class="">
+<link rel="stylesheet" href="{% static 'CSS/home.css' %}" type="text/css"/>
+<link rel="stylesheet" href="{% static 'CSS/artist_index.css' %}" type="text/css"/>
+<div class="mod_singer_list">
+    <h2 class="index__tit">
+        歌手推荐
+    </h2>
+    <ul class="singer_list__list">
         {% for artist in artists %}
             {% with "Database/pic/"|add:artist.id|add:".jpg" as image %}
-                <li class="">
-                    <a href="{% url 'artist:detail' artist.id %}"
-                       class="" onclick="setStatCookie&amp;&amp;setStatCookie();"
-                       hidefocus="true" title={{ artist.name }}>
-                        <img class="" onerror="this.src='{% static image %}';this.onerror=null;"
-                             src="{% static image %}" width="200" height="162" alt={{ artist.name }}>
-                    </a>
-                    <h3 class="">
+                <li class="singer_list__item">
+                    <div class="singer_list__item_box">
                         <a href="{% url 'artist:detail' artist.id %}"
                            onclick="setStatCookie&amp;&amp;setStatCookie();"
-                           class="" title={{ artist.name }}>
-                            {{ artist.name }}
+                           class="singer_list__cover" hidefocus="true"
+                           title={{ artist.name }}>
+                            <img class="singer_list__pic"
+                                 onerror="this.src='{% static image %}';this.onerror=null;"
+                                 src="{% static image %}"
+                                 alt={{ artist.name }}>
                         </a>
-                    </h3>
-                </li>
-            {% endwith %}
-        {% endfor %}
-    </ul>
-    <h1>专辑推荐</h1>
-    <ul class="">
-        {% for album in albums %}
-            {% with "Database/pic/"|add:album.id|add:".jpg" as image %}
-                <li class="">
-                    <a href="{% url 'album:detail' album.id %}"
-                       class="" onclick="setStatCookie&amp;&amp;setStatCookie();"
-                       hidefocus="true" title={{ album.name }}>
-                        <img class="" onerror="this.src='{% static image %}';this.onerror=null;"
-                             src="{% static image %}" width="200" height="200" alt={{ album.name }}>
-                    </a>
-                    <h3 class="">
-                        <a href="{% url 'album:detail' album.id %}"
-                           onclick="setStatCookie&amp;&amp;setStatCookie();"
-                           class="" title={{ album.name }}>
-                            专辑：{{ album.name }}
-                        </a>
-                    </h3>
-                    <h4 class="">
-                        发布时间：{{ album.publishtime }}<br>
-                        唱片公司：{{ album.company }}
-                    </h4>
-                </li>
-            {% endwith %}
-        {% endfor %}
-    </ul>
-    <h1>歌单推荐</h1>
-    <ul class="">
-        {% for playlist in playlists %}
-            {% with "Database/others/"|add:playlist.pic_path|add:".jpg" as image %}
-                <li class="">
-                    <a href="{% url 'playlist:detail' playlist.id %}"
-                       class="" onclick="setStatCookie&amp;&amp;setStatCookie();"
-                       hidefocus="true" title={{ playlist.name }}>
-                        <img class="" onerror="this.src='{% static image %}';this.onerror=null;"
-                             src="{% static image %}" width="288" height="162" alt={{ playlist.name }}>
-                    </a>
-                    <h3 class="">
-                        <a href="{% url 'playlist:detail' playlist.id %}"
-                           onclick="setStatCookie&amp;&amp;setStatCookie();"
-                           class="" title={{ playlist.name }}>
-                            {{ playlist.name }}
-                        </a>
-                    </h3>
-                    <h4 class="">
-                        创建者：{{ playlist.creator }}<br>
-                        创建时间：{{ playlist.created_time }}
-                    </h4>
+                        <h3 class="singer_list__title">
+                            <a href="" onclick="setStatCookie&amp;&amp;setStatCookie();"
+                               class="js_singer" title={{ artist.name }}>
+                                {{ artist.name }}
+                            </a>
+                        </h3>
+                    </div>
                 </li>
             {% endwith %}
         {% endfor %}
     </ul>
 </div>
+
+{#专辑推荐#}
+<link rel="stylesheet" href="{% static 'CSS/album_index.css' %}" type="text/css"/>
+<div class="mod_part_detail">
+    <h2 class="index__tit">
+        专辑推荐
+    </h2>
+    <div class="mod_playlist mod_playlist--all">
+        <ul class="playlist__list" id="album_list">
+            {% for album in albums %}
+                {% with "Database/pic/"|add:album.id|add:".jpg" as image %}
+                    <li class="playlist__item"
+                        onmouseover="this.className=(this.className+&#39; playlist__item--hover&#39;)"
+                        onmouseout="this.className=this.className.replace(/ playlist__item--hover/, &#39;&#39;)">
+                        <div class="playlist__item_box">
+                            <div class="playlist__cover mod_cover" style="visibility: visible;">
+                                <a href="{% url 'album:detail' album.id %}"
+                                   onclick="setStatCookie&amp;&amp;setStatCookie();" class="js_album">
+                                    <img src="{% static image %}"
+                                         onerror="this.src='{% static image %}';this.onerror=null;"
+                                         alt="{{ album.name }}" class="playlist__pic"
+                                         style="display: block; visibility: visible;">
+                                    <i class="mod_cover__icon_play js_play"></i>
+                                </a>
+                            </div>
+                            <h4 class="playlist__title">
+                                <span class="playlist__title_txt">
+                                    <a href="{% url 'album:detail' album.id %}" onclick="setStatCookie&amp;&amp;
+                                    setStatCookie();" class="js_album"
+                                       title={{ album.name }}>
+                                        {{ album.name }}
+                                    </a>
+                                </span>
+                            </h4>
+                            <h4 class="playlist__title">
+                                <span class="playlist__title_txt">
+                            <div class="playlist__author" title={{ album.artist_name }}>
+                                <a href="{% url 'artist:detail' album.artist_id %}" class="js_singer"
+                                   title="{{ album.artist_name }}">
+                                    {{ album.artist_name }}
+                                </a>
+                            </div>
+                                </span>
+                            </h4>
+                            <div class="playlist__other">
+                                发布时间：{{ album.publishtime }}
+                            </div>
+                            <div class="playlist__other">
+                                唱片公司：{{ album.company }}
+                            </div>
+                        </div>
+                    </li>
+                {% endwith %}
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+{#歌曲推荐#}
+
+<h2 class="index__tit">
+    歌曲推荐
+</h2>
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<table class="table table-striped">
+    <tr>
+        <th>歌曲名称</th>
+        <th>演唱者</th>
+        <th>专辑</th>
+    </tr>
+    {% for song in songs %}
+        <tr class="alt">
+            <td>
+                <a href="{% url 'song:detail' song.id %}"
+                   onclick="setStatCookie&amp;&amp;setStatCookie();"
+                   class="alt" title={{ song.name }}>
+                    {{ song.name }}
+                </a>
+            </td>
+
+            <td>
+                <a href="{% url 'artist:detail' song.artist_id %}"
+                   onclick="setStatCookie&amp;&amp;setStatCookie();"
+                   class="alt" title={{ song.artist_name }}>
+                    {{ song.artist_name }}
+                </a>
+            </td>
+
+            <td>
+                <a href="{% url 'album:detail' song.album_id %}"
+                   onclick="setStatCookie&amp;&amp;setStatCookie();"
+                   class="alt" title={{ song.album_name }}>
+                    {{ song.album_name }}
+                </a>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+
+{#歌单推荐#}
+<link rel="stylesheet" href="{% static 'CSS/album_index.css' %}" type="text/css"/>
+<div class="mod_part_detail">
+
+
+    <h2 class="index__tit">
+        歌单推荐
+    </h2>
+
+    <div class="mod_playlist mod_playlist--all">
+
+        <ul class="playlist__list" id="album_list">
+            {% for playlist in playlists %}
+                {% with "Database/others/"|add:playlist.pic_path|add:".jpg" as image %}
+                    <li class="playlist__item"
+                        onmouseover="this.className=(this.className+&#39; playlist__item--hover&#39;)"
+                        onmouseout="this.className=this.className.replace(/ playlist__item--hover/, &#39;&#39;)">
+                        <div class="playlist__item_box">
+                            <div class="playlist__cover mod_cover" style="visibility: visible;">
+                                <a href="{% url 'playlist:detail' playlist.id %}"
+                                   onclick="setStatCookie&amp;&amp;setStatCookie();" class="js_album">
+                                    <img src="{% static image %}"
+                                         onerror="this.src='{% static image %}';this.onerror=null;"
+                                         alt="{{ playlist.name }}" class="playlist__pic"
+                                         style="display: block; visibility: visible;">
+                                    <i class="mod_cover__icon_play js_play"></i>
+                                </a>
+                            </div>
+                            <h4 class="playlist__title">
+                                <span class="playlist__title_txt">
+                                    <a href="{% url 'playlist:detail' playlist.id %}" onclick="setStatCookie&amp;&amp;
+                                    setStatCookie();" class="js_album"
+                                       title={{ playlist.name }}>
+                                        {{ playlist.name }}
+                                    </a>
+                                </span>
+                            </h4>
+                            <h4 class="playlist__title">
+                                <span class="playlist__title_txt">
+                            <div class="playlist__author" title={{ playlist.creator_name }}>
+                                <a href="{% url 'user:song' playlist.creator_id %}" class="js_singer"
+                                   title="{{ playlist.creator_name }}">
+                                    {{ playlist.creator_name }}
+                                </a>
+                            </div>
+                                </span>
+                            </h4>
+                            <div class="playlist__other">
+                                创建时间：{{ playlist.created_time }}
+                            </div>
+                            <div class="playlist__other">
+                                类型：{{ playlist.labels }}
+                            </div>
+                        </div>
+                    </li>
+                {% endwith %}
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
 </body>
 </html>

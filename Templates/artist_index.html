@@ -7,28 +7,34 @@
 <body>
 {% include "base.html" %}
 {% load staticfiles %}
-<div style="padding:20px;margin-top:30px;background-color:#6e99b4;">
-    <ul class="">
+<link rel="stylesheet" href="{% static 'CSS/artist_index.css' %}" type="text/css"/>
+<div class="mod_singer_list">
+    <ul class="singer_list__list">
         {% for artist in artists %}
             {% with "Database/pic/"|add:artist.id|add:".jpg" as image %}
-                <li class="">
-                    <a href="{% url 'artist:detail' artist.id %}"
-                       class="" onclick="setStatCookie&amp;&amp;setStatCookie();"
-                       hidefocus="true" title={{ artist.name }}>
-                        <img class="" onerror="this.src='{% static image %}';this.onerror=null;"
-                             src="{% static image %}" width="200" height="162" alt={{ artist.name }}>
-                    </a>
-                    <h3 class="">
+                <li class="singer_list__item">
+                    <div class="singer_list__item_box">
                         <a href="{% url 'artist:detail' artist.id %}"
                            onclick="setStatCookie&amp;&amp;setStatCookie();"
-                           class="" title={{ artist.name }}>
-                            {{ artist.name }}
+                           class="singer_list__cover" hidefocus="true"
+                           title={{ artist.name }}>
+                            <img class="singer_list__pic"
+                                 onerror="this.src='{% static image %}';this.onerror=null;"
+                                 src="{% static image %}"
+                                 alt={{ artist.name }}>
                         </a>
-                    </h3>
+                        <h3 class="singer_list__title">
+                            <a href="" onclick="setStatCookie&amp;&amp;setStatCookie();"
+                               class="js_singer" title={{ artist.name }}>
+                                {{ artist.name }}
+                            </a>
+                        </h3>
+                    </div>
                 </li>
             {% endwith %}
         {% endfor %}
     </ul>
 </div>
+
 </body>
 </html>
