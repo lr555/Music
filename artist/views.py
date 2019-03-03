@@ -8,6 +8,7 @@ import time
 # Create your views here.
 def artist_index(request):
     content = {}
+    content['is_login'] = request.session.get('is_login', None)
     content['artists'] = []
     cursor = connection.cursor()
     cursor.execute('''select * from  artist''')
@@ -21,6 +22,7 @@ def artist_index(request):
 
 def artist_detail(request, id):
     content = {}
+    content['is_login'] = request.session.get('is_login', None)
     cursor = connection.cursor()
     cursor.execute('''select * from  artist where artist_id = {}'''.format(id))
     result = cursor.fetchone()
