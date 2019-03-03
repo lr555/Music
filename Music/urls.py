@@ -24,5 +24,8 @@ urlpatterns = [
     path('song/', include(('song.urls', 'song'), namespace='song')),
     path('user/', include(('user.urls', 'user'), namespace='user')),
     path('search/',include(('search.urls','search'),namespace='search')),
-    path('', include(('home.urls', 'home'), namespace='home'))
+    path('register/',include(('register.urls','register'),namespace='register')),
+    path('login/',include(('login.urls','login'),namespace='login')),
+    path('logout/',include(('logout.urls','logout'),namespace='logout')),
+    path('', include(('home.urls', 'home'), namespace='home')),
 ]

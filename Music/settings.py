@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'song',
     'user',
     'search',
+    'register',
+    'login',
 ]
 
 MIDDLEWARE = [
@@ -126,3 +128,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static').replace('\\', '/'),
 )
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'   # 引擎
