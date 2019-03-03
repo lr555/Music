@@ -1,0 +1,112 @@
+/*album_index*/
+.mod_part,
+.mod_part_detail {
+    position: relative;
+    margin-bottom: 30px
+}
+
+.mod_playlist {
+    overflow: hidden;
+    font-size: 0
+}
+
+.mod_playlist .playlist__list {
+    margin-right: -20px
+}
+
+.mod_playlist .playlist__header {
+    display: none
+}
+
+.mod_playlist .playlist__item {
+    display: inline-block;
+    width: 20%;
+    padding-bottom: 44px;
+    overflow: hidden;
+    font-size: 14px;
+    vertical-align: top
+}
+
+.mod_playlist .playlist__item_box {
+    position: relative;
+    margin-right: 20px
+}
+
+.mod_playlist .playlist__cover {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    padding-top: 100%;
+    margin-bottom: 15px
+}
+
+.mod_playlist .playlist__pic {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    -webkit-transform: scale(1) translateZ(0);
+    -webkit-transition: -webkit-transform .75s
+}
+
+.mod_playlist .playlist__cover:hover .playlist__pic {
+    -webkit-transform: scale(1.07) translateZ(0);
+    -webkit-transition: -webkit-transform .75s cubic-bezier(0, 1, .75, 1)
+}
+
+@supports (transform:scale(1)) {
+    .mod_playlist .playlist__pic {
+        transform: scale(1) translateZ(0);
+        transition: transform .75s
+    }
+
+    .mod_playlist .playlist__cover:hover .playlist__pic {
+        transform: scale(1.07) translateZ(0);
+        transition: transform .75s cubic-bezier(0, 1, .75, 1)
+    }
+}
+
+@supports (object-fit:cover) {
+    .mod_playlist .playlist__pic {
+        height: 100%;
+        object-fit: cover
+    }
+}
+
+.mod_playlist .mod_list_menu,
+.mod_playlist .playlist__delete,
+.mod_playlist .playlist__number {
+    display: none
+}
+
+.mod_playlist .playlist__title {
+    overflow: hidden;
+}
+
+.mod_playlist .playlist__title_txt {
+    display: inline-block;
+    float: left;
+    max-width: 100%;
+    font-weight: 400;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 22px;
+    max-height: 44px
+}
+
+.mod_playlist .playlist__author,
+.mod_playlist .playlist__author a,
+.mod_playlist .playlist__other {
+    color: #999;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mod_playlist .playlist__author a:hover {
+    color: #31c27c
+}
+
+.mod_playlist .btn_operate_menu {
+    display: none
+}

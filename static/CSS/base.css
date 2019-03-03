@@ -15,10 +15,10 @@ li {
     float: left;
 }
 
-li a {
+li a{
     display: block;
     color: #666;
-    text-align: center;
+    text-align: left;
     padding: 14px 16px;
     text-decoration: none;
 }
@@ -35,7 +35,17 @@ li a.active {
 h1 {
     text-align: center;
 }
-
+img {
+    border: 0 none;
+    width: 288px;
+    height: 162px;
+    -ms-interpolation-mode: bicubic;
+    image-rendering: optimizeQuality
+}
+.index__tit {
+    text-align: center;
+    background-position: 0 -50px
+}
 /* base_user */
 #customers {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
@@ -105,3 +115,158 @@ h1 {
     background-color: #cc0000;
 }
 
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.button1 {
+    background-color: white;
+    color: black;
+    border: 2px solid #4CAF50;
+}
+
+.button1:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.a-upload {
+    padding: 4px 10px;
+    height: 20px;
+    line-height: 20px;
+    position: relative;
+    cursor: pointer;
+    color: #888;
+    background: #fff;
+    border-radius: 4px;
+    overflow: hidden;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1
+}
+
+.a-upload input {
+    position: absolute;
+    font-size: 100px;
+    right: 0;
+    top: 0;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    cursor: pointer
+}
+
+.a-upload:hover {
+    color: #444;
+}
+
+/* New */
+/*base*/
+.mod_top_nav {
+    position: absolute;
+    left: 0px;
+    top: 0
+}
+
+.top_nav__item {
+    float: left;
+    margin-right: -5px
+}
+
+.top_nav__link {
+    display: block;
+    padding: 0 20px;
+    line-height: 90px;
+    height: 90px;
+    text-align: center;
+    font-size: 18px
+}
+
+.top_nav__link--current,
+.top_nav__link--current:hover {
+    background-color: #31c27c;
+    color: #fff
+}
+
+.mod_search_input {
+    border: 1px solid #c9c9c9;
+    padding: 0 33px 0 11px;
+    line-height: 36px;
+    height: 36px;
+    margin-top: 26px;
+    position: relative;
+    border-radius: 3px;
+    background-color: #fff;
+    -webkit-transition: width .6s ease-out;
+    transition: width .6s ease-out
+}
+
+.search_input__input {
+    width: 174px;
+    height: 36px;
+    border: 0 none;
+    font-size: 14px;
+    background: 0 0;
+    -webkit-transition: width .6s ease-out, visibility .6s 1ms ease-out;
+    transition: width .6s ease-out, visibility .6s 1ms ease-out
+}
+
+.btn_base {
+    display: inline-block;
+    padding: 8.5px 11px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.search_input__btn {
+    color: #fff;
+    background-color: #31b0d5;
+    border-color: #269abc;
+    position: absolute;
+    top: 0;
+    right: 0;
+    overflow: visible;
+}
+
+.mod_header {
+    background-color: #fff;
+    position: relative;
+    z-index: 4
+}
+
+.mod_header .section_inner {
+    padding-top: 90px
+}
+
+.mod_top_search {
+    position: absolute;
+    top: 0;
+    right: 600px
+}
+.register_login{
+    position: absolute;
+    top:0;
+    right: 20px;
+    font-size: 18px;
+    line-height:90px;
+}

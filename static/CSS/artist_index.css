@@ -1,0 +1,65 @@
+/*artist_index*/
+.mod_singer_list {
+    overflow: hidden;
+    text-align: center
+}
+
+.mod_singer_list--fans .btn_operate_menu {
+    display: none
+}
+
+.mod_singer_list--fans .singer_list__focus {
+    display: block
+}
+
+.mod_singer_list--fans .singer_list__btn_focus {
+    display: block;
+    margin: 9px auto 0
+}
+
+.singer_list__list {
+    margin-right: -20px;
+    overflow: hidden;
+    zoom: 1;
+    margin-bottom: -24px
+}
+
+.singer_list__item {
+    float: left;
+    width: 20%;
+    margin-bottom: 20px;
+    overflow: hidden
+}
+
+.singer_list__item_box {
+    position: relative;
+    margin-right: 20px;
+    background-color: #fbfbfd;
+    min-height: 195px;
+    padding: 25px 0;
+    overflow: hidden
+}
+
+.singer_list__cover,
+.singer_list__pic {
+    display: block;
+    width: 200px;
+    height: 162px;
+    border-radius: 126px
+}
+
+.singer_list__cover {
+    margin-left: auto;
+    margin-right: auto
+}
+
+.singer_list__title {
+    font-size: 16px;
+    font-weight: 400;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    zoom: 1;
+    *width: 100%;
+    margin: 20px 30px 4px
+}

@@ -1,0 +1,29 @@
+.register_login_main{
+    background: #f9f9f9;
+}
+.register_form{
+    background: #ffffff;
+    display: block;
+    position: absolute;
+    top: 120px;
+    left: 50%;
+    width: 500px;
+    height: 100%;
+    zoom: 1;
+    margin-left:-250px;
+    overflow: hidden;
+    text-align: center;
+}
+.login_form{
+    background: #ffffff;
+    display: block;
+    position: absolute;
+    top: 120px;
+    left: 50%;
+    width: 500px;
+    height: 100%;
+    zoom: 1;
+    margin-left:-250px;
+    overflow: hidden;
+    text-align: center;
+}
